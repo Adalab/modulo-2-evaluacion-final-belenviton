@@ -1,1 +1,23 @@
+.page-main {
+  display: flex;
+  margin: 3rem 4rem;
 
+  .favourites-section {
+    width: 25%;
+  }
+  .principal-section {
+    .list-title {
+      text-align: center;
+    }
+    .principal-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: auto;
+      .card {
+        &-name {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
