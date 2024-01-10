@@ -131,7 +131,6 @@ formHeader.addEventListener('submit', (event) => {
 });
 
 inputButton.addEventListener('click', handleClickSearch);
-// Ejemplo utilizando addEventListener y keypress
 iptText.addEventListener('keyup', handleClickEnter);
 
 //AL CARGAR LA PÁGINA
@@ -141,3 +140,5 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
     disneyCharacters = data.data;
     renderAllCharacters();
   });
+
+//localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
