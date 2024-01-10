@@ -26,13 +26,13 @@ const createList = (character) => {
   imgCharacters.classList.add('card-image');
   imgCharacters.src = `${character.imageUrl}`;
 
-  /*const printImage = disneyCharacters.findIndex((character) => {
-    if (character.imageUrl === -1) {
-      imgCharacters.src = `https://via.placeholder.com/200x170/ff/666/?text=${character.name}`;
-    } else {
-      
-    }
-  });*/
+  const onlyOneFavourite = disneyCharacters.findIndex(
+    (character) => character.imageUrl === imgCharacters.src
+  );
+  if (onlyOneFavourite === -1) {
+    imgCharacters.src = `https://fakeimg.pl/300x170/f0c9c9/ffffff?text=${character.name}&font=lobster`;
+    //`https://via.placeholder.com/200x170/fff/555?text=${character.name}`;
+  }
 
   imgCharacters.alt = `${character.name}`;
   imgCharacters.title = `Add character to favourites`;
@@ -97,13 +97,16 @@ const handleClickCard = (event) => {
   const oneFavourite = disneyCharacters.find(
     (oneObjectCharacter) => oneObjectCharacter._id === oneClickedCharacter
   );
-  favouriteCharacters.push(oneFavourite);
+  const onlyOneFavourite = favouriteCharacters.findIndex(
+    (sameIdent) => sameIdent._id === oneClickedCharacter
+  );
+  if (onlyOneFavourite === -1) {
+    favouriteCharacters.push(oneFavourite);
+  } else {
+    favouriteCharacters.splice(onlyOneFavourite, 1);
+  }
+
   renderFavourites();
-  console.log(oneClickedCharacter);
-  console.log(disneyCharacters);
-  console.log(oneCharacter);
-  console.log(favouriteCharacters);
-  console.log(oneFavourite);
 };
 
 const handleClickSearch = () => {
@@ -117,12 +120,19 @@ const handleClickSearch = () => {
       renderAllCharacters();
     });
 };
+const handleClickEnter = (event) => {
+  if (event.key === 'Enter') {
+    handleClickSearch();
+  }
+};
 //EVENTOS
 formHeader.addEventListener('submit', (event) => {
   event.preventDefault();
 });
 
 inputButton.addEventListener('click', handleClickSearch);
+// Ejemplo utilizando addEventListener y keypress
+iptText.addEventListener('keyup', handleClickEnter);
 
 //AL CARGAR LA PÁGINA
 fetch('//api.disneyapi.dev/character?pageSize=50')
@@ -130,9 +140,4 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
   .then((data) => {
     disneyCharacters = data.data;
     renderAllCharacters();
-    disneyCharacters.indexOf((images) => {
-      if (images.imageUrl === -1) {
-        imgCharacters.src = `https://via.placeholder.com/200x170/ff/666/?text=${character.name}`;
-      }
-    });
   });

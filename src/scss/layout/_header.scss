@@ -20,12 +20,18 @@
   flex-direction: column;
   justify-content: space-between;
   .header-title {
-    margin-top: 25rem;
+    margin-top: 23rem;
     font-size: 10rem;
     color: white;
   }
   .header-section {
-    margin-bottom: -3.5rem;
+    width: 90rem;
+    height: 15rem;
+    background-color: #193177;
+    margin-bottom: -7.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .header-form {
       height: 7rem;
       .input-text {

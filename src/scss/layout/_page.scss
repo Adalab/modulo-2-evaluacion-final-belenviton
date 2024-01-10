@@ -1,6 +1,6 @@
 .page-main {
   display: flex;
-  margin: 3rem 4rem;
+  margin: 9rem 4rem;
 
   .favourites-section {
     width: 20%;
@@ -9,6 +9,12 @@
     align-items: center;
     .favourites-title {
       @include title;
+      .image-icon {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        width: 4rem;
+        height: 4rem;
+      }
     }
   }
   .principal-section {
