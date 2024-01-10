@@ -11,8 +11,9 @@ const favouritesList = document.querySelector('.js__favourites_list');
 let disneyCharacters = [];
 let favouriteCharacters = [];
 let selectedCharacter = [];
+const favoriteStorage = JSON.parse(localStorage.getItem('favourites'));
 
-//let allList = completLi.children;
+//localStorage
 
 //FUNCIONES
 const createList = (character) => {
@@ -105,13 +106,9 @@ const handleClickCard = (event) => {
   } else {
     favouriteCharacters.splice(onlyOneFavourite, 1);
   }
-  renderFavourites();
+  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
 
-  if (localStorage.getItem('favourites') !== null) {
-    JSON.parse(localStorage.getItem('favourites'));
-  } else {
-    localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
-  }
+  renderFavourites();
 };
 
 const handleClickSearch = () => {
@@ -145,3 +142,8 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
     disneyCharacters = data.data;
     renderAllCharacters();
   });
+
+if (favoriteStorage) {
+  favouriteCharacters = favoriteStorage;
+  renderFavourites(favouritesList);
+}
