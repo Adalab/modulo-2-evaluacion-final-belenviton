@@ -7,25 +7,6 @@
 @import 'layout/footer';
 @import 'pages/index';
 
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 20rem;
-  height: 28rem;
-  margin: 1.5rem;
-  padding: 0.5rem;
-  border-radius: 20%;
-  border: solid 0.2rem rgb(0, 183, 255);
-  background-color: #148b87;
-}
-.card-image {
-  width: 18rem;
-  height: 15rem;
-  align-self: center;
-  border-radius: 20%;
-  box-shadow: 0rem 1rem 1rem 0rem #81e2de;
-}
 .favourites {
   display: flex;
   flex-direction: column;

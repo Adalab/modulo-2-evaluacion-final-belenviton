@@ -11,9 +11,11 @@ const favouritesList = document.querySelector('.js__favourites_list');
 let disneyCharacters = [];
 let favouriteCharacters = [];
 let selectedCharacter = [];
-const favoriteStorage = JSON.parse(localStorage.getItem('favourites'));
+let favouriteCard = [];
 
 //localStorage
+const favoriteStorage = JSON.parse(localStorage.getItem('favorites'));
+const favoriteCardStorage = JSON.parse(localStorage.getItem('cardFav'));
 
 //FUNCIONES
 const createList = (character) => {
@@ -32,7 +34,6 @@ const createList = (character) => {
   );
   if (onlyOneFavourite === -1) {
     imgCharacters.src = `https://fakeimg.pl/300x170/f0c9c9/ffffff?text=${character.name}&font=lobster`;
-    //`https://via.placeholder.com/200x170/fff/555?text=${character.name}`;
   }
 
   imgCharacters.alt = `${character.name}`;
@@ -55,6 +56,10 @@ const createFavourites = (description) => {
 
   liCharacters.classList.add('favourites-cards');
   liCharacters.setAttribute('data-ident', `${description._id}`);
+  //crear button
+  const button = document.createElement('button');
+  const buttontext = document.createTextNode(`x`);
+  button.classList.add('button-close');
 
   //crear img
   const imgCharacters = document.createElement('img');
@@ -70,6 +75,7 @@ const createFavourites = (description) => {
   nameCharacters.classList.add('card-name');
   //UL
   favouritesList.appendChild(liCharacters);
+  liCharacters.appendChild(button);
   liCharacters.appendChild(imgCharacters);
   liCharacters.appendChild(nameCharacters);
 };
@@ -92,8 +98,7 @@ const renderFavourites = () => {
 
 const handleClickCard = (event) => {
   const oneCharacter = event.currentTarget;
-  oneCharacter.classList.toggle('favourites');
-
+  const printFavorite = oneCharacter.classList.toggle('favourites');
   const oneClickedCharacter = parseInt(oneCharacter.dataset.ident);
   const oneFavourite = disneyCharacters.find(
     (oneObjectCharacter) => oneObjectCharacter._id === oneClickedCharacter
@@ -106,9 +111,10 @@ const handleClickCard = (event) => {
   } else {
     favouriteCharacters.splice(onlyOneFavourite, 1);
   }
-  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
-
   renderFavourites();
+  favouriteCard.push(printFavorite);
+  localStorage.setItem('favorites', JSON.stringify(favouriteCharacters));
+  //localStorage.setItem('cardFav', JSON.stringify(favouriteCard));
 };
 
 const handleClickSearch = () => {
@@ -127,6 +133,10 @@ const handleClickEnter = (event) => {
     handleClickSearch();
   }
 };
+
+/* const handleClickClose = () = {
+
+} */
 //EVENTOS
 formHeader.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -143,7 +153,22 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
     renderAllCharacters();
   });
 
+// button.addEventListener('click', handleClickClose)
+
 if (favoriteStorage) {
   favouriteCharacters = favoriteStorage;
-  renderFavourites(favouritesList);
+  renderFavourites();
 }
+/* if (favoriteCardStorage) {
+    favoriteCardStorage === true;
+    renderAllCharacters(); 
+  }*/
+/* const idFavourites = favouriteCharacters.find(
+    (oneObjectFavourite) => oneObjectFavourite._id
+  );
+  const idDisney = disneyCharacters.find(
+    (oneObjectCharacter) => oneObjectCharacter._id
+  );
+  if (idFavourites === idDisney) {
+    liCharacters.classList.add('favourites'); 
+  }*/
