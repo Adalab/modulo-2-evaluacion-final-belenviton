@@ -3,9 +3,13 @@
   margin: 3rem 4rem;
 
   .favourites-section {
-    width: 30%;
+    width: 20%;
+    .favourites-title {
+      text-align: center;
+    }
   }
   .principal-section {
+    margin-left: 12rem;
     .list-title {
       text-align: center;
     }
@@ -20,4 +24,10 @@
   text-align: center;
   margin: 1.5rem auto;
   font-size: 2rem;
+  color: rgb(31, 24, 131);
+  border-radius: 20%;
+  border: solid 0.1rem rgb(139, 10, 31);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Salsa', cursive;
 }
