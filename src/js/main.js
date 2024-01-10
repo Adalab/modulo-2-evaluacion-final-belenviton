@@ -6,13 +6,17 @@ const principalList = document.querySelector('.js__principal_list');
 const inputButton = document.querySelector('.js__input_button');
 const iptText = document.querySelector('.js__input_text');
 const favouritesList = document.querySelector('.js__favourites_list');
+const buttonReset = document.querySelector('.js__button_reset');
 
 //VARIABLES
 let disneyCharacters = [];
 let favouriteCharacters = [];
 let selectedCharacter = [];
+let favouriteCard = [];
 
-//let allList = completLi.children;
+//localStorage
+const favoriteStorage = JSON.parse(localStorage.getItem('favorites'));
+const favoriteCardStorage = JSON.parse(localStorage.getItem('cardFav'));
 
 //FUNCIONES
 const createList = (character) => {
@@ -31,7 +35,6 @@ const createList = (character) => {
   );
   if (onlyOneFavourite === -1) {
     imgCharacters.src = `https://fakeimg.pl/300x170/f0c9c9/ffffff?text=${character.name}&font=lobster`;
-    //`https://via.placeholder.com/200x170/fff/555?text=${character.name}`;
   }
 
   imgCharacters.alt = `${character.name}`;
@@ -91,8 +94,7 @@ const renderFavourites = () => {
 
 const handleClickCard = (event) => {
   const oneCharacter = event.currentTarget;
-  oneCharacter.classList.toggle('favourites');
-
+  const printFavorite = oneCharacter.classList.toggle('favourites');
   const oneClickedCharacter = parseInt(oneCharacter.dataset.ident);
   const oneFavourite = disneyCharacters.find(
     (oneObjectCharacter) => oneObjectCharacter._id === oneClickedCharacter
@@ -105,8 +107,10 @@ const handleClickCard = (event) => {
   } else {
     favouriteCharacters.splice(onlyOneFavourite, 1);
   }
-
   renderFavourites();
+  favouriteCard.push(printFavorite);
+  localStorage.setItem('favorites', JSON.stringify(favouriteCharacters));
+  //localStorage.setItem('cardFav', JSON.stringify(favouriteCard));
 };
 
 const handleClickSearch = () => {
@@ -125,6 +129,10 @@ const handleClickEnter = (event) => {
     handleClickSearch();
   }
 };
+const handleClickReset = () => {
+  localStorage.removeItem('favorites');
+  favouritesList.innerHTML = '';
+};
 //EVENTOS
 formHeader.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -132,6 +140,7 @@ formHeader.addEventListener('submit', (event) => {
 
 inputButton.addEventListener('click', handleClickSearch);
 iptText.addEventListener('keyup', handleClickEnter);
+buttonReset.addEventListener('click', handleClickReset);
 
 //AL CARGAR LA PÁGINA
 fetch('//api.disneyapi.dev/character?pageSize=50')
@@ -141,4 +150,22 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
     renderAllCharacters();
   });
 
-//localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+// button.addEventListener('click', handleClickClose)
+
+if (favoriteStorage) {
+  favouriteCharacters = favoriteStorage;
+  renderFavourites();
+}
+/* if (favoriteCardStorage) {
+    favoriteCardStorage === true;
+    renderAllCharacters(); 
+  }*/
+/* const idFavourites = favouriteCharacters.find(
+    (oneObjectFavourite) => oneObjectFavourite._id
+  );
+  const idDisney = disneyCharacters.find(
+    (oneObjectCharacter) => oneObjectCharacter._id
+  );
+  if (idFavourites === idDisney) {
+    liCharacters.classList.add('favourites'); 
+  }*/

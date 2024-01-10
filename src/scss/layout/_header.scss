@@ -9,12 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.15)
-    ),
-    url(../images/fondo-disney.jpg);
+  background-image: url(../images/imagen-fondo.jpg);
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -22,12 +17,12 @@
   .header-title {
     margin-top: 23rem;
     font-size: 10rem;
-    color: white;
+    color: #148b87;
   }
   .header-section {
     width: 90rem;
     height: 15rem;
-    background-color: #193177;
+    background-color: #148b87;
     margin-bottom: -7.5rem;
     display: flex;
     align-items: center;
@@ -42,7 +37,7 @@
       .input-button {
         height: 7rem;
         font-size: 5rem;
-        background-color: darkkhaki;
+        background-color: #dc9291;
       }
     }
   }
