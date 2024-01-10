@@ -3,6 +3,7 @@
   margin: 9rem 4rem;
 
   .favourites-section {
+    margin-left: 5rem;
     width: 20%;
     display: flex;
     flex-direction: column;
@@ -18,7 +19,7 @@
     }
   }
   .principal-section {
-    margin-left: 12rem;
+    margin-left: 15rem;
     .list-title {
       @include title;
     }
@@ -35,7 +36,7 @@
   text-align: center;
   margin: 1.5rem auto;
   font-size: 2rem;
-  background-color: #eca8cf;
+  background-color: #dc9291;
   color: rgb(31, 24, 131);
   border-radius: 0.7rem;
   border: solid 0.1rem rgb(139, 10, 31);

@@ -105,8 +105,13 @@ const handleClickCard = (event) => {
   } else {
     favouriteCharacters.splice(onlyOneFavourite, 1);
   }
-
   renderFavourites();
+
+  if (localStorage.getItem('favourites') !== null) {
+    JSON.parse(localStorage.getItem('favourites'));
+  } else {
+    localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+  }
 };
 
 const handleClickSearch = () => {
@@ -140,5 +145,3 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
     disneyCharacters = data.data;
     renderAllCharacters();
   });
-
-//localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
