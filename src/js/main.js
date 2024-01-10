@@ -6,6 +6,7 @@ const principalList = document.querySelector('.js__principal_list');
 const inputButton = document.querySelector('.js__input_button');
 const iptText = document.querySelector('.js__input_text');
 const favouritesList = document.querySelector('.js__favourites_list');
+const buttonReset = document.querySelector('.js__button_reset');
 
 //VARIABLES
 let disneyCharacters = [];
@@ -56,10 +57,6 @@ const createFavourites = (description) => {
 
   liCharacters.classList.add('favourites-cards');
   liCharacters.setAttribute('data-ident', `${description._id}`);
-  //crear button
-  const button = document.createElement('button');
-  const buttontext = document.createTextNode(`x`);
-  button.classList.add('button-close');
 
   //crear img
   const imgCharacters = document.createElement('img');
@@ -75,7 +72,6 @@ const createFavourites = (description) => {
   nameCharacters.classList.add('card-name');
   //UL
   favouritesList.appendChild(liCharacters);
-  liCharacters.appendChild(button);
   liCharacters.appendChild(imgCharacters);
   liCharacters.appendChild(nameCharacters);
 };
@@ -133,10 +129,10 @@ const handleClickEnter = (event) => {
     handleClickSearch();
   }
 };
-
-/* const handleClickClose = () = {
-
-} */
+const handleClickReset = () => {
+  localStorage.removeItem('favorites');
+  favouritesList.innerHTML = '';
+};
 //EVENTOS
 formHeader.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -144,6 +140,7 @@ formHeader.addEventListener('submit', (event) => {
 
 inputButton.addEventListener('click', handleClickSearch);
 iptText.addEventListener('keyup', handleClickEnter);
+buttonReset.addEventListener('click', handleClickReset);
 
 //AL CARGAR LA PÁGINA
 fetch('//api.disneyapi.dev/character?pageSize=50')
