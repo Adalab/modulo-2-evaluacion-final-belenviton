@@ -4,11 +4,40 @@
   margin-bottom: 3rem;
 }
 .page__header {
-  width: 100vh;
-  height: 30rem;
+  width: 100%;
+  height: 70rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-image: url(../images/fondo-disney.jpg);
-  background-size: cover; */
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.15)
+    ),
+    url(../images/fondo-disney.jpg);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .header-title {
+    margin-top: 25rem;
+    font-size: 10rem;
+    color: white;
+  }
+  .header-section {
+    margin-bottom: -3.5rem;
+    .header-form {
+      height: 7rem;
+      .input-text {
+        width: 70vh;
+        height: 7rem;
+        font-size: 5rem;
+      }
+      .input-button {
+        height: 7rem;
+        font-size: 5rem;
+        background-color: darkkhaki;
+      }
+    }
+  }
 }

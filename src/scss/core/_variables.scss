@@ -1,3 +1,12 @@
+@mixin title {
+  text-align: center;
+  font-size: 4rem;
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+  text-transform: uppercase;
+  text-decoration: solid underline;
+}
+
 // fonts
 
 // colors
