@@ -11,7 +11,7 @@ const buttonReset = document.querySelector('.js__button_reset');
 //VARIABLES
 let disneyCharacters = [];
 let favouriteCharacters = [];
-let selectedCharacter = [];
+//let selectedCharacter = [];
 let favouriteCard = [];
 
 //localStorage
@@ -57,7 +57,13 @@ const createFavourites = (description) => {
 
   liCharacters.classList.add('favourites-cards');
   liCharacters.setAttribute('data-ident', `${description._id}`);
-
+  //crear div
+  //const divButton = document.createElement ('div')
+  //crear button
+  const buttonClose = document.createElement('button');
+  buttonClose.classList.add('button-card');
+  const buttonText = document.createTextNode('X');
+  buttonClose.appendChild(buttonText);
   //crear img
   const imgCharacters = document.createElement('img');
   imgCharacters.classList.add('card-image');
@@ -72,6 +78,7 @@ const createFavourites = (description) => {
   nameCharacters.classList.add('card-name');
   //UL
   favouritesList.appendChild(liCharacters);
+  liCharacters.appendChild(buttonClose);
   liCharacters.appendChild(imgCharacters);
   liCharacters.appendChild(nameCharacters);
 };
@@ -94,7 +101,8 @@ const renderFavourites = () => {
 
 const handleClickCard = (event) => {
   const oneCharacter = event.currentTarget;
-  const printFavorite = oneCharacter.classList.toggle('favourites');
+  const printFavorite = () => oneCharacter.classList.toggle('favourites');
+  printFavorite();
   const oneClickedCharacter = parseInt(oneCharacter.dataset.ident);
   const oneFavourite = disneyCharacters.find(
     (oneObjectCharacter) => oneObjectCharacter._id === oneClickedCharacter
@@ -108,9 +116,9 @@ const handleClickCard = (event) => {
     favouriteCharacters.splice(onlyOneFavourite, 1);
   }
   renderFavourites();
-  favouriteCard.push(printFavorite);
+
   localStorage.setItem('favorites', JSON.stringify(favouriteCharacters));
-  //localStorage.setItem('cardFav', JSON.stringify(favouriteCard));
+  localStorage.setItem('cardFav', JSON.stringify(favouriteCharacters));
 };
 
 const handleClickSearch = () => {
@@ -156,10 +164,11 @@ if (favoriteStorage) {
   favouriteCharacters = favoriteStorage;
   renderFavourites();
 }
-/* if (favoriteCardStorage) {
-    favoriteCardStorage === true;
-    renderAllCharacters(); 
-  }*/
+
+if (favoriteCardStorage) {
+  favouriteCharacters === favoriteCardStorage;
+}
+
 /* const idFavourites = favouriteCharacters.find(
     (oneObjectFavourite) => oneObjectFavourite._id
   );
